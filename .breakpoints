@@ -1,0 +1,12 @@
+{
+  "files": {
+    "hooks/fetchQuizzes.js": [
+      {
+        "id": "cfe45e26-e3ba-4686-b163-c46c839542c9",
+        "line": 20,
+        "version": 682,
+        "index": 619
+      }
+    ]
+  }
+}

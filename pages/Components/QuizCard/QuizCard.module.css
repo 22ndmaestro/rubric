@@ -1,0 +1,105 @@
+.card{
+  display: flex;
+  flex-direction: column;
+  align-items: center
+  
+}
+
+.option{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  
+  width: 182px;
+  height: 35px;
+  
+  border: 2px solid #333333;
+  border-radius: 32px;
+}
+
+
+
+.quiz{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  gap: 16px;
+
+}
+
+.next{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  
+  width: 182px;
+  height: 35px;
+  
+  background: #000000;
+  border-radius: 32px;
+  color: #CCCCCC;
+}
+
+.next:hover{
+  background: #001903;
+}
+
+.nextDisabled{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  
+  width: 182px;
+  height: 35px;
+  
+  background: #000000;
+  border-radius: 32px;
+  color: #CCCCCC;
+    pointer-events: none; /* Prevent pointer events */
+    opacity: 0.6; /* Make it transparent */
+  }
+
+.position, .score{
+  display: flex;
+  gap: 16px;
+}
+
+.options{
+  display: flex;
+  flex-direction: column;
+  gap:8px
+}
+
+.header{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.backBtn,.nothing{
+  height: 56px;
+  width: 56px;
+  border-radius: 4px;
+}
+
+.heading{
+  height:100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+}
+.backBtn:hover{
+  background-color:  #fff2d1;
+}

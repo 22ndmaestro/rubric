@@ -1,0 +1,28 @@
+.form{
+  display: flex;
+  flex-direction:column;
+  gap: 16px;
+  width: 100%;
+}
+
+.input{
+  padding: 4px;
+  outline: 1px solid black;
+  width: 100%;
+  min-height: 16px;
+  border-radius: 4px;
+}
+
+.inWrapper{
+  display: flex;
+  flex-direction:column;
+  gap: 4px;
+  width: 100%;
+}
+
+.wrapper{
+  min-width: 40%;
+  display: flex;
+  flex-direction:column;
+  gap: 32px;
+}

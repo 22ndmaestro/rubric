@@ -1,0 +1,55 @@
+.option{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  
+  width: 100%;
+  min-height: 35px;
+  
+  border: 1px solid #333333;
+  border-radius: 4px;
+}
+
+.option:hover{
+  background-color:#89e189;
+}
+
+.correct{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  
+  width: 100%;
+  min-height: 35px;
+  
+  border: 1px solid #009411;
+  background: #009411;
+  border-radius: 4px;
+}
+
+.wrong{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  
+  width: 100%;
+  min-height: 35px;
+  
+  border: 1px solid #b80000;
+  background: #b80000;
+  border-radius: 4px;
+}
+
+  .disabled {
+    pointer-events: none; /* Prevent pointer events */
+  }
+

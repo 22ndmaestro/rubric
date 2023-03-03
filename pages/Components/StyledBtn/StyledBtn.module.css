@@ -1,0 +1,87 @@
+.pCTA{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  
+  width: 277px;
+  height: 61px;
+  
+  background: #FFB800;
+  border-radius: 32px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+
+color: #1A1A1A;
+}
+
+.formBtn{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  
+  width: 100%;
+  
+  background: #FFB800;
+  border-radius: 32px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+
+color: #1A1A1A;
+}
+
+.formBtn:hover,.pCTA:hover{
+  background: #f5cd66;
+}
+
+.cancelBtn{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  
+  width: 100%;
+  
+  background: #b80000;
+  border-radius: 32px;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 29px;
+
+color: #fffafa;
+}
+
+.cancelBtn:hover{
+  background-color: #570f0f;
+}
+
+.google{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  gap: 10px;
+  
+  width: 100%;
+  
+  background: #000000;
+  border-radius: 32px;
+  color: #CCCCCC;
+}
+
+.google:hover{
+  background: #001903;
+}
