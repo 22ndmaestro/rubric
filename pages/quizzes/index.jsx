@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { doc, onSnapshot, collection, query, where, getDocs } from 'firebase/firestore';
-import { db,auth } from '../api/firebase';
+import { db, auth } from '../api/firebase';
 import Form from '../Components/Form';
 import QuizCard from '../Components/QuizCard';
 import Quizzes from '../Components/Quizzes';
@@ -21,7 +21,7 @@ export default function quizesPage() {
   const [questionsID, setQuestionsID] = useState('');
 
   const settingQuestions = async (id) => {
-    setIsSubmitted(prev => !prev)
+    setIsSubmitted(prev => prev = true)
     // create a reference to the quizzes collection
     const questionsRef = collection(db, 'questions');
     const q = query(questionsRef, where('sk_quizzes_docID', '==', id));
@@ -36,37 +36,39 @@ export default function quizesPage() {
     setQuestions(questionsData);
     setIsLoaded(prev => true)
 
-}
+  }
 
 
 
 
-return (
-  <SecurePage>
-    <div className={styles.wrapper}>
-      {
-        !addPressed ? auth.currentUser && <Quizzes
-          setAddPressed={setAddPressed}
-          isLoaded={isLoaded}
-          setIsLoaded={setIsLoaded}
-          settingQuestions={settingQuestions}
-          setIsSubmitted={setIsSubmitted}
-        /> : (
-            !isSubmitted ? <Form
-              setAddPressed={setAddPressed}
-              setIsSubmitted={setIsSubmitted}
-              setQuestions={setQuestions}
-              setIsLoaded={setIsLoaded}
-              setAddPressed={setAddPressed}
-            /> : (
-                isLoaded ? (<QuizCard
-                  questions={questions}
-                  setAddPressed={setAddPressed}
-                  setIsSubmitted={setIsSubmitted}
-                  questionsID={questionsID}
-                />) : <div>Loading... </div>
-              )
-          )}</div>
-  </SecurePage>)
+  return (
+    <SecurePage>
+      <div className={styles.wrapper}>
+        {
+          !addPressed ? auth.currentUser && <Quizzes
+            setAddPressed={setAddPressed}
+            isLoaded={isLoaded}
+            setIsLoaded={setIsLoaded}
+            settingQuestions={settingQuestions}
+            setIsSubmitted={setIsSubmitted}
+            addPressed={addPressed}
+          /> : (
+              !isSubmitted ? <Form
+                               setAddPressed={setAddPressed}
+                               setIsSubmitted={setIsSubmitted}
+                               setQuestions={setQuestions}
+                               setIsLoaded={setIsLoaded}
+                               setAddPressed={setAddPressed}
+                               setQuestionsID={setQuestionsID}
+              /> : (
+                  isLoaded && (questions.length !== 0) ? (<QuizCard
+                    questions={questions}
+                    setAddPressed={setAddPressed}
+                    setIsSubmitted={setIsSubmitted}
+                    questionsID={questionsID}
+                  />) : <div>Loading... </div>
+                )
+            )}</div>
+    </SecurePage>)
 }
 

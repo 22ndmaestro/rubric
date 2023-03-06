@@ -2,11 +2,11 @@ import React, { useState, useRef } from "react";
 import StyledBtn from '../StyledBtn/StyledBtn';
 import styles from './Form.module.css';
 import { processString } from '../../../utils/chat2local';
-import { addQuiz } from '../../../utils/fireStore';
+import { addQuiz, qArray } from '../../../utils/fireStore';
 import { useAuth } from '../../../context/AuthContext'
 
 
-export default function Form({ setIsSubmitted, setQuestions, setIsLoaded, setAddPressed }) {
+export default function Form({ setIsSubmitted, setQuestions, setIsLoaded, setAddPressed, setQuestionsID }) {
   const { currentUser } = useAuth();
   const [inputs, setInputs] = useState({});
 
@@ -49,18 +49,25 @@ export default function Form({ setIsSubmitted, setQuestions, setIsLoaded, setAdd
         'questions': parsedData
       };
 
-      setQuestions(prev => [...prev, ...parsedData]);
-      addQuiz(inputs.subject, inputs.topic, inputs.material, currentUser.uid, question.questions)
-      setIsLoaded(prev=>true);
+      function processQuiz() {
+        //enabling then
+        let id = addQuiz(inputs.subject, inputs.topic, inputs.material, currentUser.uid, question.questions).then(
+          setQuestions(() => qArray(question.questions)),
+          setQuestionsID(id)
+        )
+      }
+      processQuiz();
+
+      setIsLoaded(() => true);
     } else {
       const err = await response.json();
       alert(err);
     }
   }
-  const back =()=>{
-    setInputs(prev=>prev={});
-    setIsLoaded(prev=>true);
-    setAddPressed(prev=>!prev);
+  const back = () => {
+    setInputs(() => { });
+    setIsLoaded(() => true);
+    setAddPressed(prev => !prev);
   }
 
 
@@ -68,10 +75,10 @@ export default function Form({ setIsSubmitted, setQuestions, setIsLoaded, setAdd
   return (
     <>
       <div className={styles.header}>
-        <button 
+        <button
           className={styles.backBtn}
           onClick={back}
-          >{`←`}</button>
+        >{`←`}</button>
         <h1 className={styles.heading}>Create quiz</h1>
         <button className={styles.nothing} ></button>
       </div>

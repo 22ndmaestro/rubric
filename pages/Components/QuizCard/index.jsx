@@ -27,11 +27,11 @@ export default function QuizCard({ questions, setAddPressed, setIsSubmitted, que
       return setIndex(prev => prev + 1);
     }
     updateScores(questionsID, score, length);
-    ()=>back();
+    back();
   }
 
   useEffect(() => {
-    setAnswers(prev => [...shuffleArray(answerArray)]);
+    setAnswers(() => [...shuffleArray(answerArray)]);
     //console.log(questions);
     //console.log(answerArray);
   }, [index]);
@@ -52,8 +52,10 @@ export default function QuizCard({ questions, setAddPressed, setIsSubmitted, que
       </div>
       <div className={styles.card}>
         <div className={styles.heading}>
-          <h2 className={styles.subject}>Maths</h2>
-          <p className={styles.topic}>Calculus</p>
+          {
+            //<h2 className={styles.subject}>Maths</h2>
+            //<p className={styles.topic}>Calculus</p>
+          }
         </div>
         <div className={styles.score}><div>{score}</div> <div>of</div> <div>{length}</div></div>
         <div className={styles.quiz}>

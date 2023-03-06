@@ -1,7 +1,9 @@
 import { db, auth } from '../pages/api/firebase';
-import { doc, getDoc, getDocs, collection, 
-        addDoc, Timestamp, setDoc, 
-        onSnapshot, updateDoc, arrayUnion } from 'firebase/firestore';
+import {
+  doc, getDoc, getDocs, collection,
+  addDoc, Timestamp, setDoc,
+  onSnapshot, updateDoc, arrayUnion
+} from 'firebase/firestore';
 
 
 
@@ -153,6 +155,7 @@ export const addQuiz = async (newSubject, newTopic, newMaterial, u_id, questions
 
     result.forEach(question => (addQuestion(question[0], question[1], question[2], question[3], question[4], docRef.id, u_id)
     ))
+    return docRef.id;
   } catch (e) {
     // handle any errors
     console.error("Error adding document: ", e);
@@ -160,7 +163,7 @@ export const addQuiz = async (newSubject, newTopic, newMaterial, u_id, questions
 };
 
 
-export const addQuestion = async (newquestion, newcorrectanswer,  newwronganswer1, newwronganswer2, newwronganswer3, newsk_quizzes_docID, newuser_id) => {
+export const addQuestion = async (newquestion, newcorrectanswer, newwronganswer1, newwronganswer2, newwronganswer3, newsk_quizzes_docID, newuser_id) => {
   try {
     // create a reference to the users collection
     const colRef = collection(db, "questions");
@@ -184,7 +187,39 @@ export const addQuestion = async (newquestion, newcorrectanswer,  newwronganswer
 };
 
 export const updateScores = async (id, score, newMaxScore) => {
-    const Doc = doc(db, "quizzes", id);
-    await updateDoc(Doc, { scores: arrayUnion(score) });
+  const Doc = doc(db, "quizzes", id);
+  await updateDoc(Doc, { scores: arrayUnion(score) });
   await updateDoc(Doc, { maxScore: newMaxScore });
-  };
+};
+
+export const qArray = (questions) => {
+  questions = questions.replace(/\[\[/g, "");
+  questions = questions.replace(/\]\]/g, "");
+  questions = questions.replace(/]\s+,/g, "],");
+  questions = questions.replace(/,\s+\[/g, ",[");
+
+  questions = questions.replace(/"\s+,/g, '",');
+  questions = questions.replace(/,\s+\"/g, ',"');
+  //questions = questions.replace(/"/g, '');
+  questions = questions.replace(/\t/g, '');
+  let arrays = questions.split('],[');
+  //console.log(arrays)
+  let result = [];
+  for (let i = 0; i < arrays.length; i++) {
+    result.push(arrays[i].split('","'));
+  }
+  for (let i = 0; i < result.length; i++) {
+    result[i][0] = result[i][0].replace('"', '');
+  }
+  let out = [];
+  result.forEach((arr, index )=>{
+    out.push({
+      question: arr[0] ,
+      correctanswer: arr[1],
+      wronganswer1: arr[2],
+      wronganswer2: arr[3],
+      wronganswer3: arr[4]
+      })})
+  console.log(`qArray: ${out} `)
+  return out;
+}

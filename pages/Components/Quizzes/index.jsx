@@ -5,7 +5,7 @@ import { db, auth } from '../../api/firebase';
 import styles from './Quizzes.module.css';
 
 function Quizzes({ setAddPressed, isLoaded,
-  setIsLoaded, settingQuestions,
+  setIsLoaded, settingQuestions, addPressed,
   setIsSubmitted }) {
   const [quizzes, setQuizzes] = useState([]);
 
@@ -32,7 +32,7 @@ function Quizzes({ setAddPressed, isLoaded,
     };
       setQuiz();
     
-  }, [auth]);
+  }, [auth,addPressed]);
 
 
   const clicked = () => {
